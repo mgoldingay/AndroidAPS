@@ -291,7 +291,7 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
 
     rT.COB=meal_data.mealCOB;
     rT.IOB=iob_data.iob;
-    rT.reason="COB: " + round(meal_data.mealCOB, 1) + ", Dev: " + convert_bg(deviation, profile) + ", BGI: " + convert_bg(bgi, profile) + ", ISF: " + convert_bg(sens, profile) + ", CR: " + round(profile.carb_ratio, 2) + ", Target: " + convert_bg(target_bg, profile) + "; ";
+    rT.reason="COB: " + round(meal_data.mealCOB, 0) + ", Dev: " + convert_bg(deviation, profile) + ", BGI: " + convert_bg(bgi, profile) + ", ISF: " + convert_bg(sens, profile) + ", CR: " + round(profile.carb_ratio, 2) + ", Target: " + convert_bg(target_bg, profile) + "; ";
     if (typeof autosens_data !== 'undefined' && profile.autosens_adjust_targets && autosens_data.ratio != 1)
         rT.reason += "Autosens: " + autosens_data.ratio + "; ";
     if (bg < threshold) { // low glucose suspend mode: BG is < ~80
@@ -370,7 +370,7 @@ var determine_basal = function determine_basal(glucose_status, currenttemp, iob_
                     rT.reason += ", temp " + currenttemp.rate + " ~< req " + rate + "U/hr";
                     return rT;
                 } else {
-                    rT.reason += ", setting " + rate + "U/hr";
+                    rT.reason += ", setting " + round(rate, 3) + "U/hr";
                     return tempBasalFunctions.setTempBasal(rate, 30, profile, rT, currenttemp);
                 }
             }
